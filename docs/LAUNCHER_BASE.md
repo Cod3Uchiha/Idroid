@@ -46,7 +46,8 @@ iDroid presentation requirements:
 
 ## Current status
 
-- The official Lawnchair `14-beta` source is registered as a Git submodule at `upstream/lawnchair`.
+- A `.gitmodules` declaration now identifies the official Lawnchair repository, intended submodule path `upstream/lawnchair`, and `14-beta` branch.
+- The actual Git submodule gitlink/source checkout has not yet been committed; the source is not present in the repository tree yet.
 - The earlier hand-written Kotlin launcher remains in the repository temporarily while migration is prepared.
 - The old prototype APK is not the Lawnchair-based iDroid build.
 - The submodule pointer alone does not mean the upstream source has already been compiled or that iDroid modifications have been integrated. Those are the next build milestones.
