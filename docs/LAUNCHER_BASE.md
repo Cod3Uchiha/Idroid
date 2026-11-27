@@ -46,10 +46,10 @@ There is no Lawnchair Classic option in the iDroid mode selector.
 
 1. Actions checks out the pinned Lawnchair submodule recursively.
 2. `scripts/apply-idroid-overlay.py` applies a deterministic, fail-closed overlay to the upstream source.
-3. The overlay currently adds the two-mode selector, mode-dependent icon mask and home information-panel behavior, iDroid branding/application ID, squircle defaults and hides the duplicate home information panel by default.
+3. The overlay adds the two-mode selector and reversible presets, iDroid branding/application ID, squircle masking of the original app artwork, removes the duplicate home information panel, uses an icon-only dock with a lightweight translucent capsule in iDroid Home, and softens folder surfaces. One UI Mode keeps the standard Lawnchair search bar and opaque folder treatment.
 4. Actions builds `assembleLawnWithQuickstepGithubDebug` and uploads the resulting APK.
 
-The overlay script is idempotent and checks its expected source anchors. If upstream changes those anchors, the build fails rather than silently producing an unmodified APK.
+The overlay script is deterministic, safe to re-run and checks its expected source anchors. Dock material uses a static alpha surface with an opaque fallback; it does not add a continuously blurred layer. If upstream changes those anchors, the build fails rather than silently producing an unmodified APK.
 
 ## Status
 
@@ -57,8 +57,9 @@ The overlay script is idempotent and checks its expected source anchors. If upst
 - [x] Unmodified Lawnchair 14 Quickstep debug build passed in CI.
 - [x] First iDroid overlay implementation added to the repository branch.
 - [ ] iDroid overlay build and APK artifact verification.
+- [ ] Verify the two visual presets and workspace preservation on-device.
 - [ ] Complete reference-image visual redesign across all launcher surfaces.
-- [ ] Device testing on SM-A207F/DS.
+- [ ] Device testing on SM-A207F/DS, including contrast, gestures, widgets and dock layout.
 - [ ] Android 14 ROM integration and system UI work.
 
 The old standalone Kotlin prototype is not the intended product launcher. It must not be shipped alongside the Lawnchair-derived launcher.
