@@ -16,7 +16,7 @@ An Android 14-based, iOS 18 + iOS 26-inspired custom ROM project, initially targ
 
 | Component | Planned implementation |
 | --- | --- |
-| Launcher | Kotlin app: home screen, folders, dock, app library |
+| Launcher | Pinned Lawnchair 14 source with an iDroid overlay; iDroid Home and One UI Mode |
 | Control Centre | Android system component/privileged app, depending on base ROM |
 | Notifications | SystemUI integration and notification styling |
 | Lock screen | SystemUI/keyguard integration |
@@ -46,4 +46,4 @@ An Android 14-based, iOS 18 + iOS 26-inspired custom ROM project, initially targ
 
 ## Development status
 
-See [docs/ROADMAP.md](docs/ROADMAP.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), and [device/samsung/a20s/README.md](device/samsung/a20s/README.md).
+The launcher foundation and current implementation status are tracked in [docs/LAUNCHER_BASE.md](docs/LAUNCHER_BASE.md), [docs/IOS26_DESIGN_SPEC.md](docs/IOS26_DESIGN_SPEC.md), [docs/ROADMAP.md](docs/ROADMAP.md), and [device/samsung/a20s/README.md](device/samsung/a20s/README.md).
