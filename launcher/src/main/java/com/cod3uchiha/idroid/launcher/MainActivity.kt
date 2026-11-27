@@ -155,12 +155,19 @@ class MainActivity : Activity() {
             }
             contentDescription = app.label
         }
+        // Keep the installed application's own icon; only add a consistent rounded-square tile.
+        val iconFrame = android.widget.FrameLayout(this).apply {
+            background = rounded(Color.argb(110, 255, 255, 255), dp(16))
+            elevation = dp(2).toFloat()
+            layoutParams = LinearLayout.LayoutParams(dp(58), dp(58))
+        }
         val icon = ImageView(this).apply {
             setImageDrawable(app.icon)
             scaleType = ImageView.ScaleType.FIT_CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(48), dp(48))
+            layoutParams = android.widget.FrameLayout.LayoutParams(dp(48), dp(48), Gravity.CENTER)
         }
-        tile.addView(icon)
+        iconFrame.addView(icon)
+        tile.addView(iconFrame)
         if (!compact) {
             tile.addView(TextView(this).apply {
                 text = app.label
