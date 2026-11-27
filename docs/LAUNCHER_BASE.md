@@ -12,6 +12,10 @@ iDroid now tracks the official Lawnchair repository as a Git submodule:
 
 The current upstream default branch is `16-dev`, based on Android 16 Launcher3. It is not the selected base for this device target. iDroid's intended ROM base is Android 14, so Lawnchair's `14-beta` branch is the closer match and avoids starting from an Android 16 launcher tree.
 
+## Complete iDroid visual redesign
+
+The full launcher visual target is specified in [IOS26_DESIGN_SPEC.md](IOS26_DESIGN_SPEC.md). It covers the home screen, icons, dock, app drawer, folders, widgets, search, settings, gestures, context menus, wallpaper behavior, animation, accessibility and light/dark theming. This is a complete-surface redesign, not an icon-only theme.
+
 ## iDroid modifications on top of Lawnchair
 
 Lawnchair is the launcher engine; iDroid will be a branded and customized derivative, not a separate launcher implementation. Keep upstream history and license notices. Preserve the Apache 2.0 license and all applicable attribution/NOTICE files when redistributing modified source or APKs.
