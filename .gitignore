@@ -1,0 +1,22 @@
+# Build outputs
+out/
+dist/
+build/
+.cache/
+ccache/
+
+# Local Android source trees and proprietary data
+.repo/
+vendor/*/proprietary/
+*.img
+*.zip
+*.tar
+*.tar.md5
+*.bin
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.iml
