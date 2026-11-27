@@ -3,8 +3,9 @@
 This is the intended feature scope, not a claim that every feature is already implemented. Features are delivered in stages and depend on Android 14 platform integration and hardware support.
 
 ## Home and navigation
-- [x] Basic home launcher and installed-app discovery (prototype).
-- [x] Uniform rounded-square icon containers while preserving each installed app's original icon.
+- [ ] Lawnchair 14-derived launcher built with the iDroid overlay and validated as the default home app.
+- [ ] Two-mode selector (iDroid Home / One UI Mode) and mode-specific presets, pending overlay build verification.
+- [ ] Squircle/rounded-square masks applied directly to original app artwork, with no white backing tile or artificial inset.
 - [ ] Pinned, user-configurable dock.
 - [ ] Drag-and-drop placement, folders and page management.
 - [ ] App library, search and widget host.
