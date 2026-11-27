@@ -16,3 +16,12 @@ First native Android launcher prototype for the iDroid ROM.
 Open the repository in Android Studio with Android Gradle Plugin 8.7.3 and Android SDK Platform 35 installed, then run the `:launcher:assembleDebug` task.
 
 This module has not yet been built or tested on a physical SM-A207F/DS. The app is an early launcher prototype, not a replacement for Android SystemUI or Keyguard.
+
+
+## Current limitations
+
+- This is a first UI prototype, not a polished release.
+- App discovery currently displays one launchable entry per package.
+- The dock currently uses the first four apps alphabetically; configurable pinned apps and drag-and-drop are future work.
+- The clock is rendered at activity creation and does not yet update every minute.
+- Build and runtime validation are still pending.
