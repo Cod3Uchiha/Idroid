@@ -14,8 +14,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
-import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 class MainActivity : Activity() {
@@ -35,29 +33,12 @@ class MainActivity : Activity() {
     private fun createHome(): View {
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(20), dp(24), dp(20), dp(14))
+            setPadding(dp(20), dp(18), dp(20), dp(14))
             background = GradientDrawable(
                 GradientDrawable.Orientation.TL_BR,
                 intArrayOf(Color.rgb(238, 244, 255), Color.rgb(220, 232, 250), Color.rgb(244, 239, 255))
             )
         }
-
-        val date = TextView(this).apply {
-            text = SimpleDateFormat("EEEE, d MMMM", Locale.getDefault()).format(Date())
-            setTextColor(ink)
-            textSize = 14f
-            alpha = 0.76f
-        }
-        root.addView(date)
-
-        val clock = TextView(this).apply {
-            text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
-            setTextColor(ink)
-            textSize = 48f
-            typeface = Typeface.create("sans-serif", Typeface.NORMAL)
-            setPadding(0, dp(2), 0, dp(18))
-        }
-        root.addView(clock)
 
         val heading = TextView(this).apply {
             text = "Your apps"
