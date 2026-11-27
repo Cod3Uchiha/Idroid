@@ -13,4 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "iDroid"
-include(":launcher")
+
+// The shipping launcher is built from upstream/lawnchair after applying
+// scripts/apply-idroid-overlay.py. The former standalone prototype is excluded.
