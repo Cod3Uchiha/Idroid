@@ -36,13 +36,14 @@ Apply one coherent design system across every launcher surface, not just the hom
 
 ## Launcher modes
 
-All modes must use the same Lawnchair engine and shared preferences; switching modes must not create separate launcher activities or lose home-screen data.
+Only two selectable modes are part of iDroid. Both use the same Lawnchair engine and shared preferences; switching modes must not create separate launcher activities or lose home-screen data.
 
-1. **iDroid Home** — iOS-inspired pages, floating dock, no mandatory app drawer button.
-2. **One UI-style** — home screen plus app drawer, with configurable swipe direction and grid.
-3. **Lawnchair Classic** — familiar Lawnchair layout and controls.
+1. **iDroid Home** — the default full iOS 26-inspired experience: iOS-style pages, floating dock, matching app drawer/search and no mandatory app-drawer button on the home screen.
+2. **One UI Mode** — Samsung One UI-style home screen plus app drawer, with configurable grid and swipe behavior.
 
-Mode changes must be reversible and must preserve app placements where possible.
+Do not include a Lawnchair Classic mode or expose a third mode in settings. Preserve Lawnchair's underlying functionality and customization where compatible, but present only these two iDroid modes.
+
+Mode changes must be reversible and preserve app placements, folders and widgets wherever possible.
 
 ## Implementation rules
 
