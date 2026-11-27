@@ -24,7 +24,7 @@
 - [ ] Validate contrast and accessibility.
 
 ## Phase 3 — User-facing components
-- [ ] iDroid Launcher.
+- [x] Create initial native Kotlin launcher module (prototype; build/device validation pending).
 - [ ] Notification styling.
 - [ ] Control Centre / Quick Settings integration.
 - [ ] Lock screen / Keyguard styling.
