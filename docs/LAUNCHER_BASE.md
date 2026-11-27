@@ -1,44 +1,52 @@
 # Launcher foundation: Lawnchair
 
-## Upstream
+## Upstream source
 
-- Project: https://github.com/LawnchairLauncher/lawnchair
-- Selected compatibility baseline: `v12.1.0-alpha.4`
-- Upstream commit: `b7ad08c775ceee31c9f0715a9f71acb661b4380f`
-- License: verify and preserve upstream license/notices when importing source.
+iDroid now tracks the official Lawnchair repository as a Git submodule:
 
-## Why this baseline
+- Repository: https://github.com/LawnchairLauncher/lawnchair
+- Submodule path: `upstream/lawnchair`
+- Selected branch: `14-beta`
+- Branch purpose: Lawnchair 14, based on Android 14 Launcher3.
+- Upstream README: https://github.com/LawnchairLauncher/lawnchair/tree/14-beta
 
-The current Lawnchair development branch is based on Android 16 Launcher3. iDroid's first target device is the Galaxy A20s, currently running Android 11. The Android-16-based branch is therefore not the right starting point for the first device build. The selected 12.1 alpha tag is an older code line and must be built and tested against the A20s target before it is treated as supported.
+The current upstream default branch is `16-dev`, based on Android 16 Launcher3. It is not the selected base for this device target. iDroid's intended ROM base is Android 14, so Lawnchair's `14-beta` branch is the closer match and avoids starting from an Android 16 launcher tree.
 
-## Integration direction
+## iDroid modifications on top of Lawnchair
 
-Lawnchair becomes the launcher engine; iDroid supplies the visual theme and device-specific defaults. Do not maintain a second, competing home-screen engine.
+Lawnchair is the launcher engine; iDroid will be a branded and customized derivative, not a separate launcher implementation. Keep upstream history and license notices. Preserve the Apache 2.0 license and all applicable attribution/NOTICE files when redistributing modified source or APKs.
 
-Preserve Lawnchair's launcher capabilities where compatible:
-- Home-screen pages, folders, drag-and-drop and widgets.
-- App drawer, app search and app organization.
-- Dock layout and customization.
-- Gestures and launcher preferences.
-- Backup and restore where supported by the selected version.
+iDroid presentation requirements:
+- Remove the default date/clock header from the home layout; don't add a second clock when Android's status bar already shows time.
+- iOS-inspired home-screen grid, spacing, dock and translucent surfaces.
+- Force original installed app artwork into a consistent iOS-style rounded-square mask, with no white backing tile, border, or inset. Do not bundle an icon pack or replace app artwork.
+- Use subtle blur/translucency with an opaque fallback for the Galaxy A20s.
+- Provide selectable layout presets:
+  - **iDroid Home** — iOS-inspired pages and dock.
+  - **One UI-style** — home screen plus app drawer.
+  - **Lawnchair Classic** — standard Lawnchair layout.
+- Keep these presets in the same Lawnchair engine and settings model, not separate launcher activities.
 
-iDroid presentation layer:
-- No duplicate clock/date widget by default. The Android status bar remains the source of the system clock.
-- iOS-inspired grid spacing, rounded-square icon masks and dock surface.
-- Keep every installed app's original icon artwork; do not bundle an icon pack or replace icons with Apple artwork.
-- Lightweight blur/translucency with an opaque fallback for the A20s.
-- User-selectable layout modes: **iDroid Home** (iOS-inspired pages and dock), **One UI-style** (home + app drawer), and **Lawnchair Classic** (standard Lawnchair layout). These are presets over the same launcher engine, not separate launchers.
+## Device and compatibility target
 
-## Import and build checklist
+- Device: Samsung Galaxy A20s, SM-A207F/DS.
+- ROM target: Android 14.
+- Hardware: Snapdragon 450 / Adreno 506; avoid expensive blur, overdraw and animation effects.
+- Validate Android 14 behavior on the target device. Do not infer device compatibility merely because the source branch is based on Android 14.
 
-1. Import the pinned upstream source while preserving its license and notices.
-2. Keep the upstream package/module structure intact as much as practical; isolate iDroid changes in theme resources, overlays and small patches.
-3. Replace the upstream application identity with the iDroid package identity without changing unrelated upstream behavior.
-4. Port only the required launcher changes; avoid cherry-picking Android-16-only code into the Android-11 device build.
-5. Add a reproducible build job for the imported source and verify the debug APK.
-6. Test app discovery, widgets, folders, gestures, rotation, backup/restore and default-home behavior on the SM-A207F/DS.
-7. Keep this launcher app separate from the eventual Android 14 ROM/SystemUI work. A launcher APK is not a ROM.
+## Integration sequence
 
-## Current implementation status
+1. Initialize the `upstream/lawnchair` submodule at the pinned `14-beta` branch commit.
+2. Build the unmodified upstream branch first and record all dependencies, required submodules and build instructions.
+3. Create an iDroid application identity and branding while retaining upstream notices and attribution.
+4. Apply iDroid changes as a small, reviewable patch series over Lawnchair.
+5. Replace the old standalone prototype module; do not ship two competing launchers.
+6. Add CI that checks out submodules recursively and builds the Lawnchair-derived iDroid APK.
+7. Test home pages, app drawer, search, folders, widgets, dock, gestures, icon masks, backup/restore and default-home behavior on SM-A207F/DS.
 
-The repository's existing Kotlin launcher is still a small prototype, not imported Lawnchair source. The duplicate date/time header has been removed from that prototype. The Lawnchair source import and the three layout presets are the next integration milestone; do not describe them as implemented until they are present in a tested build.
+## Current status
+
+- The official Lawnchair `14-beta` source is registered as a Git submodule at `upstream/lawnchair`.
+- The earlier hand-written Kotlin launcher remains in the repository temporarily while migration is prepared.
+- The old prototype APK is not the Lawnchair-based iDroid build.
+- The submodule pointer alone does not mean the upstream source has already been compiled or that iDroid modifications have been integrated. Those are the next build milestones.
