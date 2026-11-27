@@ -1,15 +1,16 @@
 # iDroid feature matrix
 
-This is the intended feature scope, not a claim that every feature is already implemented. Features are delivered in stages and depend on Android 14 platform integration and hardware support.
+This is the intended feature scope, not a claim that every feature is already implemented. Features are delivered in stages and depend on Android 14 platform integration and hardware support. Launcher items marked complete are present in the pinned Lawnchair 14 build and passed the iDroid overlay CI build; device-specific behavior is tracked separately.
 
 ## Home and navigation
-- [ ] Lawnchair 14-derived launcher built with the iDroid overlay and validated as the default home app.
-- [ ] Two-mode selector (iDroid Home / One UI Mode) and mode-specific presets, pending overlay build verification.
-- [ ] Squircle/rounded-square masks applied directly to original app artwork, with no white backing tile or artificial inset.
-- [ ] Pinned, user-configurable dock.
-- [ ] Drag-and-drop placement, folders and page management.
-- [ ] App library, search and widget host.
-- [ ] Home-screen editing mode and icon badge support.
+- [x] Lawnchair 14-derived launcher builds with the iDroid overlay in CI.
+- [ ] Validate the launcher as the default home app on SM-A207F/DS.
+- [x] Two-mode selector (iDroid Home / One UI Mode) with reversible icon, search-bar, smartspace and folder-surface presets.
+- [x] Squircle/rounded-square masks applied directly to original app artwork, with no white backing tile or artificial inset.
+- [x] Pinned, user-configurable dock from Lawnchair; iDroid Home uses an icon-only translucent capsule.
+- [x] Drag-and-drop placement, folders and page management from the shared Lawnchair workspace.
+- [x] Searchable app drawer and widget host from Lawnchair.
+- [x] Home-screen editing mode and icon badge support from Lawnchair.
 
 ## Lock screen and always-on display
 - [ ] iOS-inspired clock/date layouts and wallpaper depth effects.

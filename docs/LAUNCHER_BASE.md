@@ -56,7 +56,8 @@ The overlay script is deterministic, safe to re-run and checks its expected sour
 - [x] Official Lawnchair 14 submodule pinned in the iDroid repository.
 - [x] Unmodified Lawnchair 14 Quickstep debug build passed in CI.
 - [x] First iDroid overlay implementation added to the repository branch.
-- [ ] iDroid overlay build and APK artifact verification.
+- [x] iDroid overlay build and APK artifact upload in [GitHub Actions run 46055004834](https://github.com/Cod3Uchiha/Idroid/actions/runs/46055004834); downloaded APK ZIP integrity verified.
+- [x] Two-mode selector and iDroid Home dock/folder visual presets compile against the pinned Lawnchair source.
 - [ ] Verify the two visual presets and workspace preservation on-device.
 - [ ] Complete reference-image visual redesign across all launcher surfaces.
 - [ ] Device testing on SM-A207F/DS, including contrast, gestures, widgets and dock layout.
