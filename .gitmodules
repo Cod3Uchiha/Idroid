@@ -1,0 +1,4 @@
+[submodule "upstream/lawnchair"]
+	path = upstream/lawnchair
+	url = https://github.com/LawnchairLauncher/lawnchair.git
+	branch = 14-beta
