@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.graphics.Outline
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -136,19 +138,22 @@ class MainActivity : Activity() {
             }
             contentDescription = app.label
         }
-        // Keep the installed application's own icon; only add a consistent rounded-square tile.
-        val iconFrame = android.widget.FrameLayout(this).apply {
-            background = rounded(Color.argb(110, 255, 255, 255), dp(16))
-            elevation = dp(2).toFloat()
-            layoutParams = LinearLayout.LayoutParams(dp(58), dp(58))
-        }
+
+        // Apply an iOS-style rounded-square clip directly to the original app artwork.
+        // No white tile, inset, border, or replacement icon is added.
         val icon = ImageView(this).apply {
             setImageDrawable(app.icon)
-            scaleType = ImageView.ScaleType.FIT_CENTER
-            layoutParams = android.widget.FrameLayout.LayoutParams(dp(48), dp(48), Gravity.CENTER)
+            scaleType = ImageView.ScaleType.FIT_XY
+            background = GradientDrawable().apply {
+                setColor(Color.TRANSPARENT)
+                cornerRadius = dp(14).toFloat()
+            }
+            clipToOutline = true
+            outlineProvider = ViewOutlineProvider.BACKGROUND
+            layoutParams = LinearLayout.LayoutParams(dp(58), dp(58))
         }
-        iconFrame.addView(icon)
-        tile.addView(iconFrame)
+        tile.addView(icon)
+
         if (!compact) {
             tile.addView(TextView(this).apply {
                 text = app.label
