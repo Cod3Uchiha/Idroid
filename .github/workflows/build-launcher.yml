@@ -1,35 +1,33 @@
-name: Build iDroid launcher
+name: Build iDroid (Lawnchair base)
 
 on:
   push:
     branches: [main]
     paths:
-      - "launcher/**"
-      - "*.gradle.kts"
-      - "gradle.properties"
+      - ".gitmodules"
+      - "upstream/lawnchair"
       - ".github/workflows/build-launcher.yml"
+      - "docs/LAUNCHER_BASE.md"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  build:
+  build-lawnchair-base:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout iDroid and Lawnchair source
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.9"
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
@@ -39,13 +37,24 @@ jobs:
       - name: Install Android SDK packages
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Build debug APK
-        run: gradle --no-daemon :launcher:assembleDebug
+      - name: Verify upstream checkout
+        working-directory: upstream/lawnchair
+        run: |
+          git rev-parse HEAD
+          git submodule status --recursive
+          test -f gradlew
+          test -f framework-prebuilts/libs/framework-14.jar || test -f prebuilts/libs/framework-14.jar
 
-      - name: Upload debug APK
+      - name: Build Lawnchair 14 with Quickstep (GitHub variant)
+        working-directory: upstream/lawnchair
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon --stacktrace assembleLawnWithQuickstepGithubDebug
+
+      - name: Upload upstream-based debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: idroid-launcher-debug
-          path: launcher/build/outputs/apk/debug/*.apk
+          name: idroid-lawnchair-base-debug
+          path: upstream/lawnchair/build/outputs/apk/**/*.apk
           if-no-files-found: error
           retention-days: 14
