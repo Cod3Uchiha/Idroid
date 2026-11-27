@@ -8,6 +8,8 @@ on:
       - "upstream/lawnchair"
       - ".github/workflows/build-launcher.yml"
       - "docs/LAUNCHER_BASE.md"
+      - "docs/IOS26_DESIGN_SPEC.md"
+      - "scripts/**"
   workflow_dispatch:
 
 permissions:
@@ -37,24 +39,27 @@ jobs:
       - name: Install Android SDK packages
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Verify upstream checkout
+      - name: Verify pinned upstream checkout
         working-directory: upstream/lawnchair
         run: |
-          git rev-parse HEAD
+          test "$(git rev-parse HEAD)" = "6f4a81266c8d86361496a035d3080c2ebcb4886a"
           git submodule status --recursive
           test -f gradlew
-          test -f framework-prebuilts/libs/framework-14.jar || test -f prebuilts/libs/framework-14.jar
+          test -f prebuilts/libs/framework-14.jar
 
-      - name: Build Lawnchair 14 with Quickstep (GitHub variant)
+      - name: Apply iDroid launcher overlay
+        run: python3 scripts/apply-idroid-overlay.py
+
+      - name: Build iDroid with Lawnchair 14 and Quickstep
         working-directory: upstream/lawnchair
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon --stacktrace assembleLawnWithQuickstepGithubDebug
 
-      - name: Upload upstream-based debug APK
+      - name: Upload iDroid debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: idroid-lawnchair-base-debug
+          name: idroid-launcher-debug
           path: upstream/lawnchair/build/outputs/apk/**/*.apk
           if-no-files-found: error
           retention-days: 14
